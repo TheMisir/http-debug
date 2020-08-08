@@ -18,15 +18,15 @@ jobs:
       run: cargo build --release
 
   release:
+    on:
+      create:
+        tags:
+          - v*
     runs-on: ubuntu-latest
     needs: [build]
     steps:
     - uses: actions/checkout@master
     - name: Create release
-      uses: Roang-zero1/github-create-release-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
