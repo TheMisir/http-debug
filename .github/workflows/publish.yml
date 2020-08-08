@@ -17,8 +17,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: cargo build --release
-    - name: LS
-      run: ls -lh ./target/release/
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
