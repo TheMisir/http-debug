@@ -1,6 +1,6 @@
 [package]
 name = "http-debug"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Misir Jafarov <misir.ceferov@gmail.com>"]
 edition = "2018"
 
