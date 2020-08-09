@@ -9,8 +9,19 @@ fn get_port() -> u16 {
     .unwrap()
 }
 
+fn get_is_verbose(default: bool) -> bool {
+  if env::args().any(|a| a == "-v" || a == "--verbose") {
+    return true;
+  }
+
+  env::var("VERBOSE")
+    .and_then(|s| Ok(s.to_ascii_uppercase() == "TRUE"))
+    .unwrap_or(default)
+}
+
 fn main() {
   let port = get_port();
+  let is_verbose = get_is_verbose(false);
   let server = Server::http(format!("0.0.0.0:{}", port)).unwrap();
 
   println!("Server is running at {}", server.server_addr());
@@ -36,8 +47,12 @@ fn main() {
     // create response from body
     let response = Response::from_string(body);
 
-    // print and respond
-    println!("{}", body);
+    // print logs
+    if is_verbose {
+      println!("{}", body);
+    }
+
+    // respond
     request.respond(response).unwrap();
   }
 }
