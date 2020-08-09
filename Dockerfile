@@ -1,4 +1,4 @@
-FROM alpine:latest AS base
+FROM frolvlad/alpine-glibc:latest AS base
 EXPOSE 80
 
 FROM base AS final
